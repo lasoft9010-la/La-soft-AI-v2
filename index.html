@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LA SOFT AI — Your AI. Your Device.</title>
+<meta name="description" content="LA SOFT AI: a natural-conversation, offline-first, privacy-focused local AI assistant.">
+<meta name="theme-color" content="#0A1428">
+<link rel="icon" href="assets/la-logo.png">
+<link rel="apple-touch-icon" href="assets/la-logo.png">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-theme="dark">
+
+<div id="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img src="assets/la-logo.png" alt="LA Soft logo">
+        <div class="brand-name">LA <span>SOFT AI</span></div>
+      </div>
+      <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+    </div>
+
+    <button id="newChatBtn" class="new-chat-btn">
+      <span>＋</span> New chat
+    </button>
+
+    <div id="chatList" aria-label="Chat history"></div>
+
+    <div class="sidebar-footer">
+      <span id="statusPill" class="status-pill idle" title="Local AI model status">⚪ Model not loaded</span>
+      <button id="settingsBtn" class="icon-btn" title="Settings" aria-label="Settings">⚙️</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main id="main">
+
+    <div class="topbar">
+      <button id="sidebarToggle" class="icon-btn" aria-label="Toggle sidebar">☰</button>
+      <div class="brand-name" style="font-size:15px;">LA <span style="color:var(--cyan);">SOFT AI</span></div>
+    </div>
+
+    <div id="progressWrap" class="hidden">
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      <div id="progressText">Loading local model…</div>
+    </div>
+
+    <!-- Welcome / empty state -->
+    <div id="welcome">
+      <img class="welcome-logo" src="assets/la-logo.png" alt="LA Soft AI">
+      <div class="welcome-title">LA <span>SOFT AI</span></div>
+      <div class="welcome-tagline">Your AI. Your Device.</div>
+      <div class="welcome-prompt">How can I help you today?</div>
+      <div class="suggestion-row">
+        <button class="suggestion-chip" data-fill="Enaku oru business idea venum 🔥">Enaku oru business idea venum 🔥</button>
+        <button class="suggestion-chip" data-fill="Help me write a short WhatsApp message to a customer">Draft a customer WhatsApp message</button>
+        <button class="suggestion-chip" data-fill="Tamil la oru chinna kadhai sollu">Tamil la oru chinna kadhai sollu</button>
+      </div>
+      <div class="welcome-chip">✨ Powered by La Soft — runs locally on this device</div>
+    </div>
+
+    <!-- Conversation thread -->
+    <div id="thread" class="hidden"></div>
+
+    <!-- Composer -->
+    <div id="composer">
+      <div class="composer-inner">
+        <textarea id="messageInput" rows="1" placeholder="Message LA SOFT AI…" aria-label="Message LA SOFT AI"></textarea>
+        <button id="sendBtn" class="send-btn" aria-label="Send message">➤</button>
+        <button id="stopBtn" class="stop-btn hidden" aria-label="Stop generating">■</button>
+      </div>
+      <div class="composer-hint">LA SOFT AI runs locally on your device · Enter to send · Shift+Enter for a new line</div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ============ SETTINGS MODAL ============ -->
+<div id="settingsModal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Settings</h2>
+      <button id="closeSettings" class="icon-btn" aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>Local AI Model</h3>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:8px;">Runs fully on-device via WebGPU. Changing this reloads the model on next use.</p>
+      <select id="modelSelect" aria-label="Choose local model"></select>
+    </div>
+
+    <div class="settings-section">
+      <h3>Memory</h3>
+      <p>Facts LA SOFT AI has picked up about you, stored only on this device.</p>
+      <div id="memoryList"></div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button id="clearMemoryBtn" class="btn danger">Clear all memory</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>This conversation</h3>
+      <div class="btn-row">
+        <button id="clearChatBtn" class="btn danger">Clear messages</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Backup &amp; Restore</h3>
+      <p>Export everything (chats, memory, settings) as a JSON file, or restore from one.</p>
+      <div class="btn-row">
+        <button id="exportBtn" class="btn">⬇ Export backup</button>
+        <label class="btn" style="display:inline-flex; align-items:center; cursor:pointer;">
+          ⬆ Restore backup
+          <input id="importInput" type="file" accept="application/json" class="hidden">
+        </label>
+      </div>
+    </div>
+
+    <div class="privacy-note">
+      🔒 LA SOFT AI processes normal conversations entirely on this device. Nothing here is sent to a server, except the one-time model file download from the model provider's CDN when you first load a model.
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
